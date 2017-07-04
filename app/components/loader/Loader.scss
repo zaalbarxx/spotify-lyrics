@@ -1,0 +1,47 @@
+.container {
+  text-align: center;
+}
+
+.container > div {
+  width: 36px;
+  height: 36px;
+  background-color: #ddd;
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: loader-bounce 1.4s infinite ease-in-out both;
+  animation: loader-bounce 1.4s infinite ease-in-out both;
+
+  &:not(:last-child) {
+    margin-right: 15px;
+  }
+}
+
+.container .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.container .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes loader-bounce {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0)
+  }
+  40% {
+    -webkit-transform: scale(1.0)
+  }
+}
+
+@keyframes loader-bounce {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}

@@ -1,11 +1,16 @@
 // @flow
 import { combineReducers } from 'redux';
-import { routerReducer as routing } from 'react-router-redux';
-import counter from './counter';
+import { combineEpics } from 'redux-observable';
+import { routerReducer as router } from 'react-router-redux';
+import lyrics from './lyrics';
+import songs from './songs';
 
-const rootReducer = combineReducers({
-  counter,
-  routing
+export const rootEpic = combineEpics(
+
+);
+
+export const rootReducer = combineReducers({
+  lyrics,
+  songs,
+  router,
 });
-
-export default rootReducer;
