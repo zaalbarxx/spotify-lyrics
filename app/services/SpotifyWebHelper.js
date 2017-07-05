@@ -1,9 +1,12 @@
-import { SpotifyWebHelper as WebHelper } from 'node-spotify-webhelper';
-import Promise from 'bluebird';
+import WebHelper from 'spotify-web-helper';
+import { SpotifyStatus } from './../models/SpotifyStatus';
+import { Song } from './../models/Song';
 
-export default class SpotifyWebHelper extends WebHelper {
-  constructor(...opts) {
-    super(...opts);
-    this.getStatus = Promise.promisify(this.getStatus);
-  }
-}
+const transformStatusToModel = (status: SpotifyStatus): Song => ({
+  ...status.track.track_resource,
+  length: status.track.length,
+  album: { ...status.track.album_resource },
+  artist: { ...status.track.artist_resource },
+});
+
+export default WebHelper;

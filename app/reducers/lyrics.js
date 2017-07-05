@@ -1,5 +1,4 @@
 // @flow
-import { LOAD_LYRICS } from './../actions/lyrics';
 import { handle } from 'redux-pack';
 
 export type lyricsStateType = {
@@ -12,6 +11,8 @@ type actionType<T> = {
   type: string,
   payload?: T
 };
+
+const LOAD_LYRICS = 'LOAD_LYRICS';
 
 const defaultState = {
   lyrics: {},

@@ -1,7 +1,8 @@
 // @flow
-import { handle } from 'redux-pack';
-import { LOAD_CURRENT_SONG } from './../actions/songs';
+import { Observable } from 'rxjs/Observable';
+import { createAction } from 'redux-actions';
 import { Song } from './../models/Song';
+import SpotifyWebHelper from 'spotify-web-helper';
 
 export type songsStateType = {
   playing: boolean,
@@ -14,7 +15,12 @@ type actionType<T> = {
   payload?: T
 };
 
+const INITIALIZE_WEB_HELPER = 'INITIALIZE_WEB_HELPER';
+const LOAD_CURRENT_SONG = 'LOAD_CURRENT_SONG';
+const UPDATE_CURRENT_STATUS = 'UPDATE_CURRENT_STATUS';
+
 const defaultState = {
+  playing: false,
   currentSong: null,
   webHelperError: null,
 };
@@ -22,18 +28,29 @@ const defaultState = {
 export default function songs(state: songsStateType = defaultState, action: actionType<*>) {
   const { type, payload } = action;
   switch (type) {
-    case LOAD_CURRENT_SONG:
-      return handle(state, action, {
-        success: prevState => {
-          console.log(action, "ACTION");
-          const newLyrics = { ...prevState.songs };
-          newLyrics[payload.id] = payload.songs;
-          return { ...prevState, currentSong: action.payload };
-        },
-        failure: prevState => ({ ...prevState, webHelperError: payload }),
-      });
+    case UPDATE_CURRENT_STATUS:
+      return { ...state, playing: payload.playing, currentSong: payload };
     default:
       return state;
   }
 }
 
+export const initializeWebHelper = createAction(INITIALIZE_WEB_HELPER);
+const updateCurrentStatus = createAction(UPDATE_CURRENT_STATUS, (payload) => payload);
+
+let spotifyWebHelper;
+
+spotifyWebHelper = new SpotifyWebHelper();
+console.log('NEW HELPER', spotifyWebHelper);
+spotifyWebHelper.player.on('ready', () => console.log('ready'));
+spotifyWebHelper.player.on('error', () => console.log('error'));
+
+// epics
+export const initializeWebHelperEpic = (action$) =>
+  action$.ofType(INITIALIZE_WEB_HELPER)
+    .mergeMap(() => {
+
+      return Observable.fromEvent(spotifyWebHelper.player, 'ready')
+        .switchMap(() => Observable.fromEvent(spotifyWebHelper.player, 'status-will-change'))
+        .map((status) => updateCurrentStatus(status));
+    });

@@ -5,12 +5,10 @@ import { createLogger } from 'redux-logger';
 import { middleware as reduxPackMiddleware } from 'redux-pack';
 import { createEpicMiddleware } from 'redux-observable';
 import { rootEpic, rootReducer } from '../reducers';
-import * as lyricsActions from '../actions/lyrics';
-import type { lyricsStateType } from '../reducers/lyrics';
 
 const history = createHashHistory();
 
-const configureStore = (initialState?: lyricsStateType) => {
+const configureStore = (initialState?: {}) => {
   // Redux Configuration
   const middleware = [];
   const enhancers = [];
@@ -34,7 +32,6 @@ const configureStore = (initialState?: lyricsStateType) => {
 
   // Redux DevTools Configuration
   const actionCreators = {
-    ...lyricsActions,
     ...routerActions,
   };
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose

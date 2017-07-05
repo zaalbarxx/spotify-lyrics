@@ -1,5 +1,5 @@
 import React from 'react';
-import * as rxjs from 'rxjs';
+import 'rxjs';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Root from './containers/Root';
