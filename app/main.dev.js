@@ -53,6 +53,11 @@ app.on('window-all-closed', () => {
   }
 });
 
+app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
+  // Verification logic.
+  event.preventDefault();
+  callback(true);
+});
 
 app.on('ready', async () => {
   if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
