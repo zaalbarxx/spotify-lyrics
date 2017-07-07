@@ -1,6 +1,12 @@
-import { Album } from './Album';
-import { Artist } from './Artist';
-import { Song } from './Song';
+import { Track } from './Track';
+
+export type SpotifyResource = {
+  name: string,
+  uri: string,
+  location: {
+    og: ?string
+  }
+};
 
 export type SpotifyStatus = {
   client_version: string,
@@ -18,11 +24,14 @@ export type SpotifyStatus = {
   repeat: boolean,
   running: boolean,
   server_time: number,
-  shuffle: boolean,
+  shuffle: boolean
+};
+
+export type SpotifyResponse = SpotifyStatus & {
   track: {
-    album_resource: Album,
-    artist_resource: Artist,
-    track_resource: Song,
-    length: number,
+    album_resource: SpotifyResource,
+    artist_resource: SpotifyResource,
+    track_resource: SpotifyResource,
+    length: number
   }
 };

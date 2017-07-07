@@ -8,7 +8,7 @@ import { initializeWebHelper } from './../reducers/songs';
 
 export class HomePage extends Component {
   static propTypes = {
-    playing: PropTypes.bool.isRequired,
+    loaded: PropTypes.bool.isRequired,
     initializeWebHelper: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,
   };
@@ -18,7 +18,6 @@ export class HomePage extends Component {
   }
 
   componentWillUpdate(nextProps: any) {
-    console.log(nextProps);
     if (nextProps.loaded === true) {
       this.props.push('/lyrics');
     }

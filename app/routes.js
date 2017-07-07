@@ -8,8 +8,8 @@ import LyricsPageComponent from './containers/LyricsPage';
 export default () => (
   <App>
     <Switch>
-      <Route path="/" component={HomePageComponent} />
       <Route path="/lyrics" component={LyricsPageComponent} />
+      <Route path="/" component={HomePageComponent} />
     </Switch>
   </App>
 );
