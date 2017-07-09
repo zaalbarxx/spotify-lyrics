@@ -1,11 +1,20 @@
 // @flow
 import React, { Component } from 'react';
 import type { Children } from 'react';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+import { bindActionCreators } from 'redux';
 
-export default class App extends Component {
+export class App extends Component {
   props: {
-    children: Children
+    children: Children,
+    push: () => mixed
   };
+
+
+  componentWillMount() {
+    this.props.push('/');
+  }
 
   render() {
     return (
@@ -15,3 +24,7 @@ export default class App extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({ push }, dispatch);
+
+export default connect(null, mapDispatchToProps)(App);

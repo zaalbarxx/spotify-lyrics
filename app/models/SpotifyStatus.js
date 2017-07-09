@@ -8,7 +8,7 @@ export type SpotifyResource = {
   }
 };
 
-export type SpotifyStatus = {
+type BaseStatus = {
   client_version: string,
   context: {},
   next_enabled: true,
@@ -27,7 +27,9 @@ export type SpotifyStatus = {
   shuffle: boolean
 };
 
-export type SpotifyResponse = SpotifyStatus & {
+export type SpotifyStatus = BaseStatus & { track: Track };
+
+export type SpotifyResponse = BaseStatus & {
   track: {
     album_resource: SpotifyResource,
     artist_resource: SpotifyResource,
