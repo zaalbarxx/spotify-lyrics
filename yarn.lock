@@ -3176,16 +3176,16 @@ eslint-plugin-compat@^1.0.3:
     caniuse-db "1.0.30000671"
     requireindex "^1.1.0"
 
-eslint-plugin-flowtype-errors@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype-errors/-/eslint-plugin-flowtype-errors-3.3.0.tgz#4699c7fb73a1a2a6a77582d8621cc29ffd0e9a19"
+eslint-plugin-flowtype-errors@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype-errors/-/eslint-plugin-flowtype-errors-3.3.1.tgz#318a194cce958d3fb7bea7ca84461082573cc9ff"
   dependencies:
     babel-runtime "^6.23.0"
     slash "^1.0.0"
 
-eslint-plugin-flowtype@^2.33.0:
-  version "2.34.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.34.0.tgz#b9875f314652e5081623c9d2b18a346bbb759c09"
+eslint-plugin-flowtype@^2.34.1:
+  version "2.34.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.34.1.tgz#ea109175645b05d37baeac53b9b65066d79b9446"
   dependencies:
     lodash "^4.15.0"
 
@@ -3646,17 +3646,17 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-flow-bin@^0.47.0:
-  version "0.47.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.47.0.tgz#a2a08ab3e0d1f1cb57d17e27b30b118b62fda367"
+flow-bin@^0.49.1:
+  version "0.49.1"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.49.1.tgz#c9e456b3173a7535a4ffaf28956352c63bb8e3e9"
 
 flow-config-parser@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/flow-config-parser/-/flow-config-parser-0.3.0.tgz#704916efba88cd2518ab4d8f933079571276138f"
 
-flow-runtime@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/flow-runtime/-/flow-runtime-0.12.0.tgz#288fe06d407d9ffc77d15a8508d93bb8e764cc50"
+flow-runtime@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/flow-runtime/-/flow-runtime-0.13.0.tgz#3dfba528c73be961303501945c7b8a782f733448"
 
 flow-typed@^2.1.2:
   version "2.1.2"

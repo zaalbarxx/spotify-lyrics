@@ -1,37 +1,36 @@
 // @flow
 import { createAction } from 'redux-actions';
 import { Observable } from 'rxjs/Observable';
-import { UPDATE_CURRENT_STATUS, getTrackNameAndArtistName } from './songs';
+import { TRACK_CHANGED, getTrackNameAndArtistName } from './songs';
 import LyricsApi from './../services/LyricsApi';
+import { StoreAction } from '../types/StoreAction';
 
 export type LyricsStateType = {
-  lyrics: string,
+  lyrics: ?string,
   currentId: ?string,
   error: ?string
-};
-
-type actionType<T> = {
-  type: string,
-  payload?: T
 };
 
 const LOAD_LYRICS_SUCCESS = 'LOAD_LYRICS_SUCCESS';
 const LOAD_LYRICS_FAILED = 'LOAD_LYRICS_FAILED';
 
 const defaultState = {
-  lyrics: '',
+  lyrics: null,
   currentId: null,
   error: null,
 };
 
-export default function lyricsReducer(state: LyricsStateType = defaultState,
-                                      action: actionType<*>) {
+export default function lyricsReducer(
+  state: LyricsStateType = defaultState,
+  action: StoreAction<*>) {
   const { type, payload } = action;
   switch (type) {
+    case TRACK_CHANGED:
+      return { ...state, ...defaultState };
     case LOAD_LYRICS_SUCCESS:
       return { ...state, lyrics: payload.lyrics, currentId: payload.currentId, error: null };
     case LOAD_LYRICS_FAILED:
-      return { ...state, lyrics: '', error: payload };
+      return { ...state, lyrics: null, error: payload };
     default:
       return state;
   }
@@ -45,18 +44,11 @@ const loadLyricsFailed = createAction(LOAD_LYRICS_FAILED, payload => payload);
 
 const lyricsApi = new LyricsApi();
 
-export const fetchLyricsEpic = (action$, store: Store) =>
+export const fetchLyricsEpic = (action$: Observable<StoreAction>, store: Store) =>
   action$
-    .ofType(UPDATE_CURRENT_STATUS)
+    .ofType(TRACK_CHANGED)
     .mergeMap((action) =>
-      Observable.of(action)
-        .filter(() => {
-          const state = store.getState();
-          return state.songs.currentId !== state.lyrics.currentId;
-        })
-        .switchMap(() =>
-          Observable.fromPromise(lyricsApi.fetch(getTrackNameAndArtistName(store.getState())))
-            .map((lyrics) => loadLyricsSuccess(lyrics, store.getState().songs.currentId))
-            .catch((error) => Observable.of(loadLyricsFailed(error.toString())))
-        )
+      Observable.fromPromise(lyricsApi.fetch(getTrackNameAndArtistName(store.getState())))
+        .map((lyrics) => loadLyricsSuccess(lyrics, action.payload))
+        .catch((error) => Observable.of(loadLyricsFailed(error.toString())))
     );

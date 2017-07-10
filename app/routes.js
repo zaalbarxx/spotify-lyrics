@@ -2,8 +2,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 import App from './containers/App';
-import HomePageComponent from './containers/HomePage';
-import LyricsPageComponent from './containers/LyricsPage';
+import HomePageComponent from './containers/HomePage/HomePage';
+import LyricsPageComponent from './containers/LyricsPage/LyricsPage';
 
 export default () => (
   <App>

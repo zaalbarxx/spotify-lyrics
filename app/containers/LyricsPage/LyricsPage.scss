@@ -1,0 +1,20 @@
+.container {
+  background-color: black;
+  opacity: 0.8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.lyricsError {
+  color: red;
+  font-size: 24px;
+}
+
+.lyricsError, .loader {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
